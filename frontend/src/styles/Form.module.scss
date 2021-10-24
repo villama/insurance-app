@@ -6,7 +6,6 @@
   .mainArea {
     display: flex;
     flex-direction: column;
-    flex: 0 0 57%;
     max-width: 57%;
 
     .card {
@@ -42,14 +41,51 @@
           & > * {
             margin-right: 30px;
           }
+
+          @media screen and (max-width: 700px) {
+            flex-direction: column;
+          }
         }
       }
+    }
+
+    @media screen and (max-width: 700px) {
+      max-width: 100%;
     }
   }
 
   .sidebar {
-    flex: 0 0 40%;
-    max-width: 40%;
+    margin-bottom: 30px;
     box-shadow: 0 1px 9px #ccc;
+    background: #fff;
+    border-color: #ccc;
+    border-style: solid;
+    border-radius: 0;
+    border-width: 1px;
+    width: 40%;
+    height: 500px;
+
+    .header {
+      border-bottom: solid 1px #ccc;
+      padding: 20px 65px;
+      background-color: #027180;
+
+      h1 {
+        color: #f5f5f5;
+        font-family: "Publico Banner Web", Georgia, Garamond, serif;
+        font-size: 1.5625rem;
+        line-height: 1.92em;
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    .fieldWrapper {
+      padding: 30px 65px;
+    }
+
+    @media screen and (max-width: 700px) {
+      display: none;
+    }
   }
 }

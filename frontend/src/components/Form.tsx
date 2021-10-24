@@ -162,7 +162,12 @@ function Form({ reviewQuote, setLoadingContent }: FormProps) {
         </div>
       </div>
       <div className={styles.sidebar}>
-        Sidebar
+        <header className={styles.header}>
+          <h1>Side panel</h1>
+        </header>
+        <div className={styles.fieldWrapper}>
+            This will disappear when the screen is smaller
+          </div>
       </div>
     </form>
   )
