@@ -2,7 +2,7 @@ import dotenv from 'dotenv'
 import express from 'express'
 import cors from 'cors'
 import helmet from 'helmet'
-import { sayHi, getUserQuotes, getQuotes, calculateQuote, getUserContracts } from './service'
+import { sayHi, getUser, getUserQuotes, getQuotes, calculateQuote, getUserContracts } from './service'
 
 dotenv.config()
 
@@ -15,6 +15,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 app.get('/', sayHi)
+
+app.get('/users/:userId', getUser)
 
 app.get('/quotes', getQuotes)
 app.get('/quotes/:userId', getUserQuotes)

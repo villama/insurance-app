@@ -7,6 +7,7 @@ import Contract from '../types/Contract'
 
 const MyInsurance: NextPage = () => {
   const [userId, setUserId] = useState(-1)
+  const [userName, setUserName] = useState('')
   const [quotes, setQuotes] = useState<Quote[]>()
   const [contracts, setContracts] = useState<Contract[]>()
 
@@ -14,6 +15,13 @@ const MyInsurance: NextPage = () => {
     async function fetchData() {
       const userIdFromStorage = parseInt(localStorage.getItem('userId')!)
       setUserId(userIdFromStorage)
+      const userRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/${userIdFromStorage}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      setUserName((await userRes.json()).name)
       const quotesRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/quotes/${userIdFromStorage}`, {
         method: 'GET',
         headers: {
@@ -63,7 +71,7 @@ const MyInsurance: NextPage = () => {
           </header>
           <div className={styles.contentContainer}>
             <div className={styles.description}>
-              Contracts for User { userId }
+              Contracts for {userName}
             </div>
             <div className={styles.contractNameContainer}>
               {contracts && contracts.map(contract =>

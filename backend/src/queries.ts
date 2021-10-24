@@ -11,6 +11,10 @@ const pool = new Pool({
   port: 5432,
 })
 
+export async function selectUser(userId: number) {
+  return (await pool.query('SELECT * FROM users WHERE user_id = $1', [userId])).rows[0]
+}
+
 export async function selectQuotes() {
   return (await pool.query('SELECT * FROM quotes ORDER BY created ASC')).rows
 }

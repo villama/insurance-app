@@ -1,10 +1,14 @@
 import type { Request, Response } from 'express'
 import { validateQuoteBody } from './validate'
-import { selectQuotes, selectUserQuotes, insertQuote, selectUserContracts } from './queries'
+import { selectUser, selectQuotes, selectUserQuotes, insertQuote, selectUserContracts } from './queries'
 import QuoteInfo from './types/QuoteInfo'
 
 export function sayHi(req: Request, res: Response) {
   res.send('Hola')
+}
+
+export async function getUser(req: Request, res: Response) {
+  res.send(await selectUser(parseInt(req.params.userId)))
 }
 
 export async function getQuotes(req: Request, res: Response) {
