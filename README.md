@@ -4,6 +4,8 @@ This full stack monorepo shows a React frontend view (with a hardcoded login use
 
 When you get a new quote from the '**Get a Quote**' view, the added quote can be viewed from '**My Insurance**'.
 
+The frontend look and flow is copied from [https://www.axa.ie/car-insurance/quote/your-details/](https://www.axa.ie/car-insurance/quote/your-details/).
+
 # Startup
 
 Please install [**Docker Desktop**](https://www.docker.com/products/docker-desktop) to run this full stack app locally:
@@ -26,7 +28,7 @@ If you need to reset the app data, you can run the following to stop and remove 
 
 * The backend is written in **TypeScript** with **Node.js** using the [**Express**](https://expressjs.com/) framework.
 
-* The **Postgres** database is served from [**Docker Hub**](https://hub.docker.com/_/postgres). Startup SQL scripts are locatined in [**./backend/sql**](./backend/sql). See [**create_tables.sql**](./backend/sql/create_tables.sql) for the table structures, and [**fill_tables.sql**](./backend/sql/fill_tables.sql) for the starting data.
+* The **Postgres** database is served from [**Docker Hub**](https://hub.docker.com/_/postgres). Startup SQL scripts are located in `./backend/sql`. See [**create_tables.sql**](./backend/sql/create_tables.sql) for the table structures, and [**fill_tables.sql**](./backend/sql/fill_tables.sql) for the starting data.
 
 * [**Docker**](https://www.docker.com/) is used to simplify local development. Please see the [**docker-compose**](./docker-compose.yml) file for more in-depth configuration details.
 
@@ -36,4 +38,4 @@ If you need to reset the app data, you can run the following to stop and remove 
 
 * Designing a user login flow and authentication was expected to take a lot of time, so the app frontend operates around a hardcoded logged in user. SQL queries are user-specific, but authentication (e.g. using OAuth 2.0) is not implemented.
 
-* Validation is done quite quickly only in the frontend, and not comprehensively. Security, authentication, and validation are things that should not be taken lightly, and must always be thoughtfully implemented for production apps. However, doing it right takes time, so I chose to set these things aside this weekend in favour of focusing on other aspects of the app.
+* Validation is done quite quickly only in the frontend, and not comprehensively. Security, authentication, and validation are things that should not be taken lightly, and must always be thoughtfully implemented for production apps. However, doing it right takes time, so I chose to set these things aside this weekend in favour of focusing on other aspects of the app, such as the frontend views and reading/writing operations.
