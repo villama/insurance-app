@@ -12,5 +12,24 @@ CREATE TABLE IF NOT EXISTS quotes (
   created TIMESTAMP NOT NULL,
   CONSTRAINT fk_user_id
     FOREIGN KEY(user_id)
-    REFERENCES users(user_id) ON DELETE CASCADE
+    REFERENCES users(user_id)
+);
+
+-- Create companies table
+CREATE TABLE IF NOT EXISTS companies (
+  company_id SERIAL PRIMARY KEY,
+  company_name varchar(125) NOT NULL
+);
+
+-- Create contracts table
+CREATE TABLE IF NOT EXISTS contracts (
+  contract_id SERIAL PRIMARY KEY,
+  user_id INT NOT NULL,
+  company_id INT NOT NULL,
+  CONSTRAINT fk_user_id
+    FOREIGN KEY(user_id)
+    REFERENCES users(user_id),
+  CONSTRAINT company_id
+    FOREIGN KEY(company_id)
+    REFERENCES companies(company_id)
 );

@@ -2,13 +2,14 @@ import React from 'react'
 import styles from '../styles/FormRadio.module.scss'
 
 interface FormRadioProps {
-  label: string
+  showValidation: boolean,
+  label: string,
   options: string[],
-  selected: number
+  selected: number,
   onChange: (evt: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-function FormRadio({ label, options, selected, onChange }: FormRadioProps) {
+function FormRadio({ showValidation, label, options, selected, onChange }: FormRadioProps) {
   return (
     <div className={styles.container}>
       <div className={styles.title}>
@@ -22,6 +23,7 @@ function FormRadio({ label, options, selected, onChange }: FormRadioProps) {
           </label>
         ))}
       </div>
+      { showValidation && selected === -1 && <p className={styles.validationMessage}>Select a title</p> }
     </div>
   )
 }

@@ -8,11 +8,12 @@ import FormSubmitButton from './FormSubmitButton'
 import QuoteInfo from '../types/QuoteInfo'
 
 interface FormProps {
-  reviewQuote: (body: any) => void
-  setLoadingContent: (body: any) => void
+  reviewQuote: (body: QuoteInfo) => void
+  setLoadingContent: (value: boolean) => void
 }
 
 function Form({ reviewQuote, setLoadingContent }: FormProps) {
+  const [userId, setUserId] = useState(-1)
   const honoraryOptions = ['Mr', 'Mrs', 'Ms', 'Dr']
   const [honoraryIdx, setHonoraryIdx] = useState(-1)
   const [firstName, setFirstName] = useState('')
@@ -24,11 +25,15 @@ function Form({ reviewQuote, setLoadingContent }: FormProps) {
   const [paySchedule, setPaySchedule] = useState(-1)
   const [insuranceStartDate, setInsuranceStartDate] = useState({ day: '', month: '', year: '' })
   const [disclaimerAgree, setDisclaimerAgree] = useState(false)
+  const [showValidation, setShowValidation] = useState(true)
+
+  if (typeof window !== "undefined" && userId === -1) setUserId(parseInt(localStorage.getItem('userId')!))
 
   async function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault()
     setLoadingContent(true)
     const body: QuoteInfo = {
+      userId,
       honoraryOptions,
       honoraryIdx,
       firstName,
@@ -43,7 +48,7 @@ function Form({ reviewQuote, setLoadingContent }: FormProps) {
       quoteValue: -1
     }
 
-    const res = await fetch('http://localhost:3001/quote', {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/quotes`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -66,6 +71,7 @@ function Form({ reviewQuote, setLoadingContent }: FormProps) {
           </header>
           <div className={styles.fieldWrapper}>
             <FormRadio
+              showValidation={showValidation}
               label='Title'
               selected={honoraryIdx}
               options={honoraryOptions}

@@ -12,29 +12,7 @@ import LoadingOverlay from '../components/LoadingOverlay'
 const GetQuote: NextPage = () => {
   const [progressStripIdx, setProgressStripIdx] = useState(0)
   const [loadingContent, setLoadingContent] = useState(false)
-  const initialQuoteInfo: QuoteInfo = {
-    honoraryOptions: [],
-    honoraryIdx: -1,
-    firstName: '',
-    lastName: '',
-    dob: {
-      day: '',
-      month: '',
-      year: ''
-    },
-    email: '',
-    phoneNumber: '',
-    smoker: 0,
-    paySchedule: -1,
-    insuranceStartDate: {
-      day: '',
-      month: '',
-      year: ''
-    },
-    disclaimerAgree: false,
-    quoteValue: 0
-  }
-  const [quoteInfo, setQuoteInfo] = useState(initialQuoteInfo)
+  const [quoteInfo, setQuoteInfo] = useState<QuoteInfo>()
 
   function reviewQuote(body: QuoteInfo) {
     setQuoteInfo(body)
@@ -56,7 +34,7 @@ const GetQuote: NextPage = () => {
       <main className={styles.main}>
         <ProgressStrip idx={progressStripIdx}/>
         { progressStripIdx === 0 && <Form reviewQuote={reviewQuote} setLoadingContent={setLoadingContent} /> }
-        { progressStripIdx === 1 && <Review quoteInfo={quoteInfo} proceedToPayment={proceedToPayment} /> }
+        { progressStripIdx === 1 && <Review quoteInfo={quoteInfo!} proceedToPayment={proceedToPayment} /> }
         { progressStripIdx === 2 && <Payment /> }
       </main>
 

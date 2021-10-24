@@ -1,9 +1,12 @@
+import dotenv from 'dotenv'
 import express from 'express'
 import cors from 'cors'
 import helmet from 'helmet'
-import { sayHi, getQuotes, calculateQuote } from './service'
+import { sayHi, getUserQuotes, getQuotes, calculateQuote, getUserContracts } from './service'
 
-const PORT = process.env.PORT || 3001
+dotenv.config()
+
+const PORT = process.env.PORT
 const app = express()
 
 app.use(helmet())
@@ -12,7 +15,11 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 app.get('/', sayHi)
-app.get('/quote', getQuotes)
-app.post('/quote', calculateQuote)
+
+app.get('/quotes', getQuotes)
+app.get('/quotes/:userId', getUserQuotes)
+app.post('/quotes', calculateQuote)
+
+app.get('/contracts/:userId', getUserContracts)
 
 app.listen(PORT, () => console.log(`⚡️[server]: Server is running on port ${PORT}`))
