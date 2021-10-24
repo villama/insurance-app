@@ -2,6 +2,7 @@ import React from 'react'
 import styles from '../styles/FormDate.module.scss'
 
 interface FormDateProps {
+  showValidation: boolean,
   label: string,
   value: {
     day: string,
@@ -11,7 +12,7 @@ interface FormDateProps {
   onChange: (evt: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-function FormDate({ label, value, onChange }: FormDateProps) {
+function FormDate({ showValidation, label, value, onChange }: FormDateProps) {
   return (
     <div className={styles.container}>
       <div className={styles.title}>
@@ -31,6 +32,7 @@ function FormDate({ label, value, onChange }: FormDateProps) {
           <input name='year' value={value.year} onChange={onChange} placeholder='YYYY' className={[styles.input, styles.year].join(' ')}></input>
         </div>
       </div>
+      { showValidation && (value.day === '' || value.month === '' || value.year === '') && <p className={styles.validationMessage}>Invalid date</p> }
     </div>
   )
 }

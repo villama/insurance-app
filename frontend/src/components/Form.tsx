@@ -25,12 +25,16 @@ function Form({ reviewQuote, setLoadingContent }: FormProps) {
   const [paySchedule, setPaySchedule] = useState(-1)
   const [insuranceStartDate, setInsuranceStartDate] = useState({ day: '', month: '', year: '' })
   const [disclaimerAgree, setDisclaimerAgree] = useState(false)
-  const [showValidation, setShowValidation] = useState(true)
+  const [showValidation, setShowValidation] = useState(false)
 
   if (typeof window !== "undefined" && userId === -1) setUserId(parseInt(localStorage.getItem('userId')!))
 
   async function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault()
+
+    setShowValidation(true)
+    if (!inputIsValid()) return
+
     setLoadingContent(true)
     const body: QuoteInfo = {
       userId,
@@ -62,6 +66,17 @@ function Form({ reviewQuote, setLoadingContent }: FormProps) {
     reviewQuote(body)
   }
 
+  function inputIsValid() {
+    if (
+      userId === -1 || honoraryIdx === -1 || firstName === '' || lastName === '' ||
+      dob.day === '' || dob.month === '' || dob.year === '' ||
+      email === '' || phoneNumber === '' || smoker === -1 || paySchedule === -1 ||
+      insuranceStartDate.day === '' || insuranceStartDate.month === '' || insuranceStartDate.year === '' ||
+      disclaimerAgree === false
+    ) return false
+    return true
+  }
+
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
       <div className={styles.mainArea}>
@@ -79,32 +94,38 @@ function Form({ reviewQuote, setLoadingContent }: FormProps) {
             />
             <div className={styles.names}>
               <FormInput
+                showValidation={showValidation}
                 label='First name'
                 value={firstName}
                 onChange={evt => setFirstName(evt.target.value)}
               />
               <FormInput
+                showValidation={showValidation}
                 label='Last name'
                 value={lastName}
                 onChange={evt => setLastName(evt.target.value)}
               />
             </div>
             <FormDate
+              showValidation={showValidation}
               label='Date of birth'
               value={dob}
               onChange={evt => setDob(prevDob => ({ ...prevDob, [evt.target.name]: evt.target.value }))}
             />
             <FormInput
+              showValidation={showValidation}
               label='Email address'
               value={email}
               onChange={evt => setEmail(evt.target.value)}
             />
             <FormInput
+              showValidation={showValidation}
               label='Phone number'
               value={phoneNumber}
               onChange={evt => setPhoneNumber(evt.target.value)}
             />
             <FormRadio
+              showValidation={showValidation}
               label='Have you smoked in the last six months?'
               selected={smoker}
               options={['Yes', 'No']}
@@ -119,17 +140,20 @@ function Form({ reviewQuote, setLoadingContent }: FormProps) {
           </header>
           <div className={styles.fieldWrapper}>
             <FormRadio
+              showValidation={showValidation}
               label='How will you pay for your insurance?'
               selected={paySchedule}
               options={['Monthly', 'Yearly']}
               onChange={evt => setPaySchedule(parseInt(evt.target.value))}
             />
             <FormDate
+              showValidation={showValidation}
               label='When do you want your insurance to start?'
               value={insuranceStartDate}
               onChange={evt => setInsuranceStartDate(prevDate => ({...prevDate, [evt.target.name]: evt.target.value }))}
             />
             <FormDisclaimer
+              showValidation={showValidation}
               checked={disclaimerAgree}
               onChange={evt => setDisclaimerAgree(!disclaimerAgree)}
             />

@@ -23,7 +23,7 @@ function FormRadio({ showValidation, label, options, selected, onChange }: FormR
           </label>
         ))}
       </div>
-      { showValidation && selected === -1 && <p className={styles.validationMessage}>Select a title</p> }
+      { showValidation && selected === -1 && <p className={styles.validationMessage}>Select an option</p> }
     </div>
   )
 }
