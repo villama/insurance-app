@@ -1,0 +1,36 @@
+# This compose file is for local development only
+
+version: '3.9'
+services:
+  postgres:
+    image: postgres:13.3
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./backend/pg-data:/var/lib/postgresql/data
+      - ./backend/sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+      - ./backend/sql/fill_tables.sql:/docker-entrypoint-initdb.d/fill_tables.sql
+  backend:
+    build:
+      context: ./backend
+    restart: always
+    ports:
+      - '3001:3001'
+    volumes:
+      - ./backend:/app
+  frontend:
+    build:
+      context: ./frontend
+    restart: always
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./frontend:/app

@@ -1,0 +1,36 @@
+.container {
+  box-sizing: border-box;
+  width: 100%;
+  align-items: center;
+  background-color: #00008f;
+  border-color: #000072;
+  border-radius: 0;
+  border-style: solid;
+  border-width: 0 0 2px 0;
+  color: #fff;
+  cursor: pointer;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  font: normal 600 .875em/1em "Source Sans Pro",Arial,sans-serif;
+  -ms-flex-align: center;
+  -ms-flex-pack: center;
+  height: 40px;
+  justify-content: center;
+  letter-spacing: .05em;
+  outline-offset: 2px;
+  overflow: hidden;
+  padding: 0 20px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 195ms cubic-bezier(.4,0,1,1);
+  user-select: none;
+  vertical-align: middle;
+  z-index: 0;
+  margin-top: 30px;
+
+  &:hover {
+    background-color: #000072;
+    }
+}

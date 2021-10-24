@@ -1,18 +1,18 @@
-import dotenv from 'dotenv'
-import express, { Request, Response } from 'express'
+import express from 'express'
+import cors from 'cors'
 import helmet from 'helmet'
-
-dotenv.config()
+import { sayHi, getQuotes, calculateQuote } from './service'
 
 const PORT = process.env.PORT || 3001
 const app = express()
 
 app.use(helmet())
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(cors())
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('<h1>Hello from the TypeScript world!</h1>');
-});
+app.get('/', sayHi)
+app.get('/quote', getQuotes)
+app.post('/quote', calculateQuote)
 
-app.listen(PORT, () => console.log(`⚡️[server]: Server is running at https://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`⚡️[server]: Server is running on port ${PORT}`))
