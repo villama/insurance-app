@@ -28,7 +28,7 @@ If you need to reset the app data, you can run the following to stop and remove 
 
 * The backend is written in **TypeScript** with **Node.js** using the [**Express**](https://expressjs.com/) framework.
 
-* The **Postgres** database is served from [**Docker Hub**](https://hub.docker.com/_/postgres). Startup SQL scripts are located in `./backend/sql`. See [**create_tables.sql**](./backend/sql/create_tables.sql) for the table structures, and [**fill_tables.sql**](./backend/sql/fill_tables.sql) for the starting data.
+* The **Postgres** database image is served from [**Docker Hub**](https://hub.docker.com/_/postgres). Startup SQL scripts are located in `./backend/sql`. See [**create_tables.sql**](./backend/sql/create_tables.sql) for the table structures, and [**fill_tables.sql**](./backend/sql/fill_tables.sql) for the starting data.
 
 * [**Docker**](https://www.docker.com/) is used to simplify local development. Please see the [**docker-compose**](./docker-compose.yml) file for more in-depth configuration details.
 
